@@ -1,6 +1,4 @@
 import urllib.request
-import os
-
 class InvalidValueException(Exception):
     pass
 
@@ -58,16 +56,28 @@ def download(where, to, name = None):
     else:
         constructed_name = to + where[where.rindex("/"):]
 
-    urllib.request.urlretrieve(where, constructed_name)
+    urllib.request.urlretrieve(where, constructed_name.replace("_", " "))
 
 if __name__ == "__main__":
     import json
 
     # loads the json configuration file
     config = json.load(open("./config.json", "r"))
+    construction_formula = config["Constrution"]["url"]
+    configurations = config["DownloadSettings"]
+
+    # ask user for some information
+    for variable in config["variables"]:
+        if variable in configurations:
+            value = configurations[variable]
+        else:
+            value = "None"
+
+        formatted_string = "The variable {} has value {}. Do you want to change it? Yes or No are the only accepted answers\n".format(variable, value)
+        output = input(formatted_string)
 
     # generates a url given the formula and the configured keys
-    url = construct(config["Constrution"]["url"], config["DownloadSettings"], concatenator = '/', escape_prefix = '/')
-
+    url = construct(construction_formula, configurations, concatenator = '/', escape_prefix = '/')
+    print(url)
     # given the url, load the download directory and download the content
-    download(url, config["DownloadSettings"]["location"])
+    #download(url, config["DownloadSettings"]["location"])
