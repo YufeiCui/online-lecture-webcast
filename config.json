@@ -1,0 +1,38 @@
+{
+    "DownloadSettings":{
+        "location" : "/Users/user/Downloads",
+        "domain" : "http://lecturecast.utsc.utoronto.ca",
+        "path" : "lectures",
+        "year" : "2017",
+        "semester" : "Fall",
+        "course" : "CSCC73H3",
+        "lecture" : "16",
+        "extension": "mp4"
+    },
+    "Constrution":{
+      "url":[
+        "domain",
+        "path",
+        [
+          "year",
+          "semester",
+          "_"
+        ],
+
+        "course",
+        [
+          "course",
+          "/Lecture",
+          "lecture",
+          "_"
+        ],
+        [
+          "course",
+          "/Lecture",
+          "lecture",
+          "_"
+        ],
+        "extension"
+      ]
+    }
+}
